@@ -1,8 +1,9 @@
-import { Title, Wrapper } from './Home.styled';
-export const Home = () => {
+import css from './Home.module.css';
+
+export default function Home() {
   return (
-    <Wrapper>
-      <Title>Welcome to PhoneBook</Title>{' '}
-    </Wrapper>
+    <div className={css.container}>
+      <h1 className={css.title}>Welcome to PhoneBook</h1>{' '}
+    </div>
   );
-};
+}

@@ -67,7 +67,7 @@ export const ContactForm = () => {
             required
           />
         </label>
-        <label htmlFor={nameInputId}>
+        <label htmlFor={numberInputId}>
           Number
           <input
             type="tel"

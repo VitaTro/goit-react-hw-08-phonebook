@@ -14,7 +14,7 @@ const clearAuthHeader = () => {
 };
 
 // реєстрація користувача
-export const userRegister = createAsyncThunk(
+export const register = createAsyncThunk(
   // визначається тип дії (action type).
   'user/register',
   // анонімна функція
@@ -32,27 +32,24 @@ export const userRegister = createAsyncThunk(
   }
 );
 // оновлення користувача
-export const userRefresh = createAsyncThunk(
-  'user/refresh',
-  async (_, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const persistedToken = state.auth.token;
-    if (persistedToken === null) {
-      return thunkAPI.rejectWithValue('Unable to fetch user.'); // Помилка, якщо токен не збережений у стані
-    }
-    try {
-      setAuthHeader(persistedToken);
-      const response = await axios.get('users/current');
-      return response.data;
-    } catch (error) {
-      alert(error.message);
-      return thunkAPI.rejectWithValue(error.message);
-    }
+export const refresh = createAsyncThunk('user/refresh', async (_, thunkAPI) => {
+  const state = thunkAPI.getState();
+  const persistedToken = state.auth.token;
+  if (persistedToken === null) {
+    return thunkAPI.rejectWithValue('Unable to fetch user.'); // Помилка, якщо токен не збережений у стані
   }
-);
+  try {
+    setAuthHeader(persistedToken);
+    const response = await axios.get('users/current');
+    return response.data;
+  } catch (error) {
+    alert(error.message);
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
 
 // вхід користувача в систему
-export const userLogin = createAsyncThunk(
+export const login = createAsyncThunk(
   'user/login',
   async (credentials, thunkAPI) => {
     try {
@@ -67,16 +64,13 @@ export const userLogin = createAsyncThunk(
 );
 
 // вихід користувача із системи
-export const userLogOut = createAsyncThunk(
-  'user/logout',
-  async (_, thunkAPI) => {
-    try {
-      await axios.post('/users/logout');
-      clearAuthHeader(); // очищення заголовка авторизації
-      // return response;
-    } catch (error) {
-      alert(error.message);
-      return thunkAPI.rejectWithValue(error.message);
-    }
+export const logOut = createAsyncThunk('user/logout', async (_, thunkAPI) => {
+  try {
+    await axios.post('/users/logout');
+    clearAuthHeader(); // очищення заголовка авторизації
+    // return response;
+  } catch (error) {
+    alert(error.message);
+    return thunkAPI.rejectWithValue(error.message);
   }
-);
+});

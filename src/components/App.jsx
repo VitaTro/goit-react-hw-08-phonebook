@@ -2,17 +2,20 @@ import { useAuth } from 'hooks/useAuth';
 import { lazy, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router';
-import { userRefresh } from '../redux/auth/operations';
+import { refresh } from '../redux/auth/operations';
 import { selectIsRefreshing } from '../redux/auth/selectors';
 import { Layout } from './Layout/Layout';
+import { RestrictedRoute } from './RestrictedRoure';
+
 const Home = lazy(() => import('../pages/Home'));
+const Register = lazy(() => import('../pages/Register'));
 
 export const App = () => {
   const dispatch = useDispatch();
   const { isRefreshing } = useAuth(selectIsRefreshing);
 
   useEffect(() => {
-    dispatch(userRefresh()); //викликаємо функцію оновлення користувача при монтажі компонента або зміні діспатч
+    dispatch(refresh()); //викликаємо функцію оновлення користувача при монтажі компонента або зміні діспатч
   }, [dispatch]);
   return isRefreshing ? (
     <p>Refreshing user..</p>
@@ -22,7 +25,12 @@ export const App = () => {
         {/* головна сторінка */}
         <Route index element={<Home />} />
         {/* сторінка реєстрації */}
-        <Route path="/register" />
+        <Route
+          path="/register"
+          element={
+            <RestrictedRoute redirectTo="/login" component={<Register />} />
+          }
+        />
         {/* сторінка входу */}
         <Route path="/login" />
         {/* сторінка контактів користувача */}

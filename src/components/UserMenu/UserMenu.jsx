@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { userLogOut } from '../../redux/auth/operations';
+import { logOut } from '../../redux/auth/operations';
 import { selectUser } from '../../redux/auth/selectors';
 
 // користувач залогувався
@@ -9,7 +9,7 @@ export const UserMenu = () => {
   return (
     <section>
       <div>Welcome to PhoneBook {user.name}</div>{' '}
-      <button type="button" onClick={() => dispatch(userLogOut())}></button>{' '}
+      <button type="button" onClick={() => dispatch(logOut())}></button>{' '}
     </section>
   );
 };

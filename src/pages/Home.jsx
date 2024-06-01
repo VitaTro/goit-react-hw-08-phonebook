@@ -1,7 +1,8 @@
-export default function Home() {
+import { Title, Wrapper } from './Home.styled';
+export const Home = () => {
   return (
-    <section>
-      <h1>Welcome to Phonebook!</h1>{' '}
-    </section>
+    <Wrapper>
+      <Title>Welcome to PhoneBook</Title>{' '}
+    </Wrapper>
   );
-}
+};

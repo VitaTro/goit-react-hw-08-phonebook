@@ -2,8 +2,8 @@ import { nanoid } from '@reduxjs/toolkit';
 import Notiflix from 'notiflix';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContacts } from 'redux/contacts/operations';
-import { selectContacts } from 'redux/contacts/selectors';
+import { addContacts } from '../../redux/contacts/operations';
+import { selectContacts } from '../../redux/contacts/selectors';
 
 // створення унікальних ідентифікаторів для полів форми
 const nameInputId = nanoid();

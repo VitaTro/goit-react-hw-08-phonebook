@@ -5,11 +5,13 @@ import { Route, Routes } from 'react-router';
 import { refresh } from '../redux/auth/operations';
 import { selectIsRefreshing } from '../redux/auth/selectors';
 import { Layout } from './Layout/Layout';
-import { RestrictedRoute } from './RestrictedRoure';
+import { PrivateRoute } from './PrivateRoute';
+import { RestrictedRoute } from './RestrictedRoute';
 
-const Home = lazy(() => import('../pages/Home'));
+const Home = lazy(() => import('../pages/Home/Home'));
 const Register = lazy(() => import('../pages/Register'));
-
+const Login = lazy(() => import('../pages/Login'));
+const Contacts = lazy(() => import('../pages/Contacts'));
 export const App = () => {
   const dispatch = useDispatch();
   const { isRefreshing } = useAuth(selectIsRefreshing);
@@ -32,9 +34,19 @@ export const App = () => {
           }
         />
         {/* сторінка входу */}
-        <Route path="/login" />
+        <Route
+          path="/login"
+          element={
+            <RestrictedRoute redirectTo="/contacts" component={<Login />} />
+          }
+        />
         {/* сторінка контактів користувача */}
-        <Route path="/contacts" />
+        <Route
+          path="/contacts"
+          element={
+            <PrivateRoute redirectTo="/login" component={<Contacts />} />
+          }
+        />
       </Route>
 
       {/* якщо жоден маршрут не співпадає, то повертає на головну сторінку */}

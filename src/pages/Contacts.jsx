@@ -3,8 +3,8 @@ import { ContactList } from 'components/ContactList/ContactList';
 import { Loader } from 'components/Loader/Loader';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectIsLoading } from 'redux/auth/selectors';
-import { fetchContacts } from 'redux/contacts/operations';
+import { selectIsLoading } from '../redux/auth/selectors';
+import { fetchContacts } from '../redux/contacts/operations';
 
 // сторінка Контакти відповідає за відображення списку контактів та їх форми
 export default function Contacts() {

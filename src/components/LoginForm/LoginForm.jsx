@@ -1,5 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { login } from '../../redux/auth/operations';
+import { Button, Form, Input, Label, Section } from './LoginForm.styled';
 
 // відповідає за форму авторизації користувача
 export const LoginForm = () => {
@@ -20,30 +21,32 @@ export const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Email
-        <input
-          type="email"
-          name="email"
-          placeholder="email"
-          pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-          title="Please enter a valid email address"
-          required
-        />
-      </label>
-      <label>
-        Password
-        <input
-          type="password"
-          name="password"
-          placeholder="password"
-          pattern="^[a-zA-Z0-9!@#$%^&*()-_=+`~[\]{}|:<>/?]+$"
-          title="The password should contain only Latin letters (both uppercase and lowercase), numbers and other symbols"
-          required
-        />
-      </label>
-      <button type="submit"> Log In</button>
-    </form>
+    <Section>
+      <Form onSubmit={handleSubmit}>
+        <Label>
+          Email
+          <Input
+            type="email"
+            name="email"
+            placeholder="email"
+            pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+            title="Please enter a valid email address"
+            required
+          />
+        </Label>
+        <Label>
+          Password
+          <Input
+            type="password"
+            name="password"
+            placeholder="password"
+            pattern="^[a-zA-Z0-9!@#$%^&*()-_=+`~[\]{}|:<>/?]+$"
+            title="The password should contain only Latin letters (both uppercase and lowercase), numbers and other symbols"
+            required
+          />
+        </Label>
+        <Button type="submit"> Log In</Button>
+      </Form>
+    </Section>
   );
 };

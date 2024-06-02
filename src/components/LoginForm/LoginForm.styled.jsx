@@ -12,6 +12,12 @@ export const Section = styled.section`
   align-items: center;
   height: 100vh;
 `;
+export const Wrapper = styled.div`
+  font-size: 20px;
+  margin: 0 auto;
+  text-align: center;
+  color: brown;
+`;
 export const Form = styled.form`
   display: flex;
   flex-direction: column;

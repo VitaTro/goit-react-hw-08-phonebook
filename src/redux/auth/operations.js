@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+// import { registrationFailureEmailInUseNotification } from 'utils/notifications';
 // створення НТТР - запиту за допомогою 'axios'
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com/';
 
@@ -23,10 +24,13 @@ export const register = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       // відправляє РОST-запит на сервер
-      const response = await axios.post('/users/register', credentials);
+      const response = await axios.post('/users/signup', credentials);
       setAuthHeader(response.data.token);
       return response.data;
     } catch (error) {
+      // if (error.response.data.code === 11000) {
+      //   registrationFailureEmailInUseNotification();
+      // }
       return thunkAPI.rejectWithValue(error.message);
     }
   }

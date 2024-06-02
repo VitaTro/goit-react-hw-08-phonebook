@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router';
 import { refresh } from '../redux/auth/operations';
 import { selectIsRefreshing } from '../redux/auth/selectors';
+import { Wrapper } from './App.styled';
 import { Layout } from './Layout/Layout';
 import { PrivateRoute } from './PrivateRoute';
 import { RestrictedRoute } from './RestrictedRoute';
@@ -22,35 +23,37 @@ export const App = () => {
   return isRefreshing ? (
     <p>Refreshing user..</p>
   ) : (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        {/* головна сторінка */}
-        <Route index element={<Home />} />
-        {/* сторінка реєстрації */}
-        <Route
-          path="/register"
-          element={
-            <RestrictedRoute redirectTo="/login" component={<Register />} />
-          }
-        />
-        {/* сторінка входу */}
-        <Route
-          path="/login"
-          element={
-            <RestrictedRoute redirectTo="/contacts" component={<Login />} />
-          }
-        />
-        {/* сторінка контактів користувача */}
-        <Route
-          path="/contacts"
-          element={
-            <PrivateRoute redirectTo="/login" component={<Contacts />} />
-          }
-        />
-      </Route>
+    <Wrapper>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          {/* головна сторінка */}
+          <Route index element={<Home />} />
+          {/* сторінка реєстрації */}
+          <Route
+            path="/register"
+            element={
+              <RestrictedRoute redirectTo="/login" component={<Register />} />
+            }
+          />
+          {/* сторінка входу */}
+          <Route
+            path="/login"
+            element={
+              <RestrictedRoute redirectTo="/contacts" component={<Login />} />
+            }
+          />
+          {/* сторінка контактів користувача */}
+          <Route
+            path="/contacts"
+            element={
+              <PrivateRoute redirectTo="/login" component={<Contacts />} />
+            }
+          />
+        </Route>
 
-      {/* якщо жоден маршрут не співпадає, то повертає на головну сторінку */}
-      <Route path="*" element={<Home />} />
-    </Routes>
+        {/* якщо жоден маршрут не співпадає, то повертає на головну сторінку */}
+        <Route path="*" element={<Home />} />
+      </Routes>
+    </Wrapper>
   );
 };

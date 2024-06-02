@@ -1,4 +1,4 @@
-import { LoginForm } from 'components/LoginFofm/LoginForm';
+import { LoginForm } from 'components/LoginForm/LoginForm';
 
 // відповідає за відображення сторінки входу в систему
 export default function Login() {

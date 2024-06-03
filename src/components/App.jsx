@@ -13,6 +13,7 @@ const Home = lazy(() => import('../pages/Home/Home'));
 const Register = lazy(() => import('../pages/Register'));
 const Login = lazy(() => import('../pages/Login'));
 const Contacts = lazy(() => import('../pages/Contacts'));
+
 export const App = () => {
   const dispatch = useDispatch();
   const { isRefreshing } = useAuth(selectIsRefreshing);
@@ -20,6 +21,7 @@ export const App = () => {
   useEffect(() => {
     dispatch(refresh()); //викликаємо функцію оновлення користувача при монтажі компонента або зміні діспатч
   }, [dispatch]);
+
   return isRefreshing ? (
     <p>Refreshing user..</p>
   ) : (

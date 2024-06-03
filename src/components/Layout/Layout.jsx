@@ -7,7 +7,7 @@ import { Loader } from '../Loader/Loader';
 export const Layout = () => {
   return (
     <div>
-      <AppBar />{' '}
+      <AppBar />
       <Suspense fallback={<Loader />}>
         {/* Дочірній компонент, який буде містити відповідний компонент в залежності від поточного шляху  */}
         <Outlet />

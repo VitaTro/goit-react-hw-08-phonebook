@@ -1,5 +1,5 @@
 import { nanoid } from '@reduxjs/toolkit';
-import Notiflix from 'notiflix';
+
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContacts } from '../../redux/contacts/operations';
@@ -16,39 +16,33 @@ export const ContactForm = () => {
   const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
 
+  // відслідковування змін у полях вводу і оновлює відповідний стан
+  const handleChange = e => {
+    const { name, value } = e.target;
+    if (name === 'name') {
+      setName(value);
+    } else if (name === 'number') {
+      setNumber(value);
+    }
+  };
+
   // обробка відправлення форми
   const handleSubmit = e => {
     e.preventDefault();
-  };
 
-  // перевірка, чи такий контакт вже є у списку
-  const isContacts = contacts.some(
-    contact => contact.name.toLowerCase() === name.toLowerCase()
-  );
+    // перевірка форми на пусті поля
+    if (name.trim() === '' || number.trim() === '') return;
 
-  if (isContacts) {
-    Notiflix.Notify(`${name} is in use. Try another name. `);
-    return;
-  }
-
-  // йде відправка дії для додавання нового контакту до Redux store
-  dispatch(addContacts({ name, number }));
-  setName('');
-  setNumber('');
-
-  // обробка зміни значень полів форми
-  const handleChange = e => {
-    const { name, value } = e.currentTarget;
-    switch (name) {
-      case 'name':
-        setName(value);
-        break;
-      case 'number':
-        setNumber(value);
-        break;
-      default:
-        return;
+    // перевірка, чи немає повторюваних імен
+    const isRepeating = contacts.some(contact => contact.name === name);
+    if (isRepeating) {
+      alert('Contact with this name already exists!');
+      return;
     }
+
+    dispatch(addContacts({ name, number }));
+    setName('');
+    setNumber('');
   };
 
   return (

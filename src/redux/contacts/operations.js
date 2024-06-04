@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 // створення НТТР - запиту за допомогою 'axios'
-axios.defaults.baseURL = 'https://connections-api.herokuapp.com/';
+// axios.defaults.baseURL = 'https://connections-api.herokuapp.com/';
 // створення асинхронічного запиту на показ контактів
 export const fetchContacts = createAsyncThunk(
   'contacts/fetchAll',
@@ -36,7 +36,7 @@ export const deleteContacts = createAsyncThunk(
   async (contactId, thunkAPI) => {
     try {
       // надсилання DELETE-запиту на '/contacts'
-      const response = await axios.delete(`/contact/{contactId}`);
+      const response = await axios.delete(`/contacts/${contactId}`);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

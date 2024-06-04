@@ -1,5 +1,5 @@
 import { ContactForm } from 'components/ContactForm/ContactForm';
-import { ContactList } from 'components/ContactList/ContactList';
+// import { ContactList } from 'components/ContactList/ContactList';
 import { Loader } from 'components/Loader/Loader';
 import { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
@@ -23,7 +23,7 @@ export default function Contacts() {
       </Helmet>
       <ContactForm />
       <div>{isLoading && <Loader />}</div>
-      <ContactList />
+      {/* <ContactList /> */}
     </>
   );
 }

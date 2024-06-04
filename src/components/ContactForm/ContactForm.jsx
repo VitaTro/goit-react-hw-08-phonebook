@@ -1,9 +1,19 @@
 import { nanoid } from '@reduxjs/toolkit';
 
+import { ContactList } from 'components/ContactList/ContactList';
+import { Filter } from 'components/Filter/Filter';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContacts } from '../../redux/contacts/operations';
 import { selectContacts } from '../../redux/contacts/selectors';
+import {
+  Button,
+  Form,
+  Input,
+  Label,
+  Section,
+  Wrapper,
+} from './ContactForm.styled';
 
 // створення унікальних ідентифікаторів для полів форми
 const nameInputId = nanoid();
@@ -47,38 +57,44 @@ export const ContactForm = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor={nameInputId}>
-          Name
-          <input
-            type="text"
-            name="name"
-            placeholder="name"
-            value={name}
-            onChange={handleChange}
-            pattern="^[^\d]+$"
-            title="The name should contain only letters, apostrophes, hyphens, and indents"
-            required
-          />
-        </label>
-        <label htmlFor={numberInputId}>
-          Number
-          <input
-            type="tel"
-            name="number"
-            placeholder="number"
-            value={number}
-            onChange={handleChange}
-            pattern="\+\d{11}"
-            minlength="12"
-            maxlength="12"
-            title="The phone number should start with + followed by 11 digits"
-            required
-          />
-        </label>
-        <button type="submit">Add contact </button>
-      </form>
-      {/* <Filter /> */}
+      <Section>
+        <Wrapper>
+          <h2> Add contact, please</h2>
+          <Form onSubmit={handleSubmit}>
+            <Label htmlFor={nameInputId}>
+              Name
+              <Input
+                type="text"
+                name="name"
+                placeholder="name"
+                value={name}
+                onChange={handleChange}
+                pattern="^[^\d]+$"
+                title="The name should contain only letters, apostrophes, hyphens, and indents"
+                required
+              />
+            </Label>
+            <Label htmlFor={numberInputId}>
+              Number
+              <Input
+                type="tel"
+                name="number"
+                placeholder="number"
+                value={number}
+                onChange={handleChange}
+                pattern="\+\d{11}"
+                minLength="12"
+                maxLength="12"
+                title="The phone number should start with + followed by 11 digits"
+                required
+              />
+            </Label>
+            <Button type="submit">Add contact </Button>
+          </Form>
+        </Wrapper>
+        <Filter />
+        <ContactList />
+      </Section>
     </>
   );
 };

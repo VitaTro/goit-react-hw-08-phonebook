@@ -6,7 +6,7 @@ export const Input = styled.input`
   width: 300px;
   font: inherit;
   cursor: pointer;
-  margin: 20px 430px 10px;
+  margin: 20px 600px 10px;
   font-size: 20px;
   font-weight: 500;
 `;
